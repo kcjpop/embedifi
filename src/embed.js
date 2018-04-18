@@ -4,7 +4,7 @@
     if (!current) return
 
     const iframe = document.createElement('iframe')
-    iframe.src = `${window.location.origin}/?${current.dataset.payload}`
+    iframe.src = `${current.src.replace('/embed.js', '')}/?${current.dataset.payload}`
     iframe.width = '100%'
     iframe.height = 400
     iframe.frameBorder = 0
