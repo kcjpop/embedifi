@@ -1,7 +1,12 @@
 {
   const current = document.currentScript
   function embedifi() {
-    if (!current) return
+    console.log('Start running')
+    if (!current) {
+      console.error('Cannot get current script')
+      return
+    }
+    console.log(current)
 
     const iframe = document.createElement('iframe')
     iframe.src = `${current.src.replace('/embed.js', '')}/?${current.dataset.payload}`
@@ -13,11 +18,9 @@
     current.parentNode.insertBefore(iframe, current.nextSibling)
 
     window.addEventListener('message', e => {
-      console.log(e, iframe.src, iframe.src.indexOf(e.origin) === -1)
-      if (iframe.src.indexOf(e.origin) === -1) return
       iframe.height = e.data ? parseInt(e.data, 10) + 50 : 400
     })
   }
 
-  setTimeout(embedifi, 5)
+  setTimeout(embedifi, 300)
 }
