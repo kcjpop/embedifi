@@ -13,8 +13,8 @@
     current.parentNode.insertBefore(iframe, current.nextSibling)
 
     window.addEventListener('message', e => {
-      console.log(e, window.location.origin)
-      if (e.origin !== window.location.origin) return
+      console.log(e, iframe.src, iframe.src.indexOf(e.origin) === -1)
+      if (iframe.src.indexOf(e.origin) === -1) return
       iframe.height = e.data ? parseInt(e.data, 10) + 50 : 400
     })
   }
