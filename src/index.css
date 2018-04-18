@@ -1,3 +1,49 @@
 .flex {
   display: flex;
 }
+
+.flex-column {
+  flex-direction: column;
+}
+
+.lh-copy {
+  line-height: 1.5;
+}
+
+.mw6 {
+  max-width: 32rem;
+}
+
+.dark-gray {
+  color: #333;
+}
+
+.gray {
+  color: #777;
+}
+
+.no-underline {
+  text-decoration: none;
+}
+
+.f3 {
+  font-size: 1.5rem;
+}
+
+.ttu {
+  text-transform: uppercase;
+}
+
+.mb3 {
+  margin-bottom: 1rem;
+}
+
+.pa3 {
+  padding: 1rem;
+}
+.br1 {
+  border-radius: 0.125rem;
+}
+.card-3 {
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+}
