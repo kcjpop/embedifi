@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "axios": "^0.18.0",
+    "base64util": "^2.0.0-f",
     "cheerio": "^1.0.0-rc.2",
     "minireset.css": "0.0.3",
     "redom": "^3.12.0"

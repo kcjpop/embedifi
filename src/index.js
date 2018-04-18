@@ -2,6 +2,8 @@ import { el as m, mount } from 'redom'
 import 'minireset.css'
 import './index.css'
 
+const base64util = require('base64util')
+
 const data = {
   url: 'https://hikerlust.com/am-thuc-hoi-an-nhung-mon-ngon-khong-the-choi-tu-noi-pho-hoi',
   domain: 'hikerlust.com',
@@ -12,7 +14,15 @@ const data = {
     'https://res.cloudinary.com/hikerlust/image/upload/v1523636091/15138552_10209750781958219_5517654460475676022_o_d4jwuf.jpg'
 }
 
-function App(data) {
+function getDataFromSearch() {
+  const s = window.location.search.substr(1)
+  return s.length === 0 ? null : JSON.parse(base64util.decode(s))
+}
+
+function App() {
+  const data = getDataFromSearch()
+  if (data == null) return m('h1', 'Error')
+
   return m(
     'a.flex.flex-column.br1.mw6.no-underline.card-3',
     { target: '_blank', rel: 'noopener noreferrer', href: data.url },
@@ -28,4 +38,4 @@ function App(data) {
   )
 }
 
-mount(document.body, App(data))
+mount(document.body, App())
