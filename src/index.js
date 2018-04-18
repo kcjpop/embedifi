@@ -1,33 +1,41 @@
-import { el as m, mount } from 'redom'
+import { el as m, mount, setChildren } from 'redom'
 import 'minireset.css'
 import './index.css'
 
 const base64util = require('base64util')
 
 const data = {
-  url: 'https://hikerlust.com/am-thuc-hoi-an-nhung-mon-ngon-khong-the-choi-tu-noi-pho-hoi',
-  domain: 'hikerlust.com',
-  title: 'Ẩm thực Hội An - những món ngon không thể chối từ nơi phố Hội',
+  url: 'https://tuoitre.vn/may-bay-no-dong-co-giua-khong-trung-hanh-khach-bi-hut-ra-cua-so-20180418091055045.htm',
+  domain: 'tuoitre.vn',
+  title: 'Máy bay nổ động cơ giữa không trung, hành khách bị hút ra cửa sổ',
   description:
-    'Nên chăng, nếu có ghé qua Hội An thì đừng quên ghé lại những hàng quán nhỏ xinh để thưởng thức cho tới tận cùng. ',
-  image:
-    'https://res.cloudinary.com/hikerlust/image/upload/v1523636091/15138552_10209750781958219_5517654460475676022_o_d4jwuf.jpg'
+    'TTO - Một hành khách đã bị hút nửa người ra khỏi cửa sổ và thiệt mạng sau khi động cơ máy bay của hãng Southwest Airlines bất ngờ nổ tung giữa trời ngày 17-4 (giờ Mỹ).',
+  image: 'https://cdn.tuoitre.vn/thumb_w/1200/2018/4/18/photo1524017514129-15240175141291673641385.jpg'
 }
+
+console.log(base64util.encode(JSON.stringify(data)))
 
 function getDataFromSearch() {
   const s = window.location.search.substr(1)
   return s.length === 0 ? null : JSON.parse(base64util.decode(s))
 }
 
+function emitItemHeight(el) {
+  return () => {
+    window.parent.postMessage(el.offsetHeight, '*')
+  }
+}
+
 function App() {
   const data = getDataFromSearch()
   if (data == null) return m('h1', 'Error')
 
-  return m(
-    'a.flex.flex-column.br1.mw6.no-underline.card-3',
+  const wrapper = m('.db.center.mw5')
+  const content = m(
+    'a.flex.flex-column.br1.ma2.no-underline.card-1',
     { target: '_blank', rel: 'noopener noreferrer', href: data.url },
     [
-      m('p', m('img', { src: data.image })),
+      m('p', m('img', { src: data.image, onload: emitItemHeight(wrapper) })),
       m(
         '.pa3',
         m('h2.dark-gray.f3.mb3', data.title),
@@ -36,6 +44,10 @@ function App() {
       )
     ]
   )
+
+  setChildren(wrapper, content)
+
+  return wrapper
 }
 
 mount(document.body, App())

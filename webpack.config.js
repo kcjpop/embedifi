@@ -9,6 +9,7 @@ const mode = process.env.NODE_ENV
 module.exports = {
   mode: mode || 'development',
   entry: {
+    embed: path.resolve(__dirname, 'src/embed.js'),
     app: path.resolve(__dirname, 'src/index.js')
   },
   output: {
@@ -24,7 +25,9 @@ module.exports = {
     ]
   },
   plugins: [
-    new HtmlWebpackPlugin(),
+    new HtmlWebpackPlugin({
+      excludeChunks: ['embed']
+    }),
     new MiniCssExtractPlugin(),
     ...(mode === 'production' ? [(new CleanWebpackPlugin(['dist']), new UglifyJSPlugin())] : [])
   ]
