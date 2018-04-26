@@ -6,6 +6,7 @@ function App(vnode) {
     vnode.state = {
       frameSrc: null,
       frameCode: null,
+      height: 600,
       item: {
         url: 'https://hikerlust.com/mot-minh-lac-giua-seoul-6-ngay-5-dem-phan-1',
         domain: 'hikerlust.com',
@@ -26,12 +27,16 @@ function App(vnode) {
     const src = `https://embed.hikerlust.com/?${payload}`
 
     vnode.state.frameSrc = src
-    vnode.state.frameCode = `<iframe frameborder="0" width="100%" height="490" src="${src}"></iframe>`
+    vnode.state.frameCode = `<iframe frameborder="0" width="100%" height="${vnode.state.height}" src="${src}"></iframe>`
   }
 
   const doUpdateIframe = e => {
     e.preventDefault()
     buildIframe()
+  }
+
+  const doUpdateHeight = e => {
+    vnode.state.height = parseInt(e.currentTarget.value, 10)
   }
 
   const doFetch = e => {
@@ -54,7 +59,7 @@ function App(vnode) {
   }
 
   const view = () => {
-    const { frameSrc, frameCode, item } = vnode.state
+    const { frameSrc, frameCode, height, item } = vnode.state
 
     return m(
       '.mw8-ns.center.sans-serif',
@@ -118,6 +123,10 @@ function App(vnode) {
               placeholder: 'Summary',
               oninput: doUpdateInput
             }),
+            m('input.mv2.pa3.br2.ba.b--moon-gray[type=number][step=10]', {
+              value: vnode.state.height,
+              onchange: doUpdateHeight
+            }),
             m('button.pa3.bg-dark-gray.gold.bn.ttu.tracked.pointer', { type: 'submit' }, 'Get code')
           )
         ),
@@ -125,7 +134,7 @@ function App(vnode) {
           '.w-50',
           m(
             'iframe',
-            Object.assign({ width: '100%', frameborder: 0, height: 490 }, frameSrc != null ? { src: frameSrc } : {})
+            Object.assign({ width: '100%', frameborder: 0, height }, frameSrc != null ? { src: frameSrc } : {})
           )
         )
       ),
