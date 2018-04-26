@@ -63,7 +63,7 @@ function App(vnode) {
         { onsubmit: doFetch },
         m('input.mv2.pa3.br2.ba.b--moon-gray.w-100', {
           name: 'url',
-          value: 'https://hikerlust.com/am-thuc-hoi-an-nhung-mon-ngon-khong-the-choi-tu-noi-pho-hoi'
+          placeholder: 'e.g. https://hikerlust.com/am-thuc-hoi-an-nhung-mon-ngon-khong-the-choi-tu-noi-pho-hoi'
         }),
         m(
           '.ml3',
