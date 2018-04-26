@@ -10,7 +10,8 @@ module.exports = {
   mode: mode || 'development',
   entry: {
     embed: path.resolve(__dirname, 'src/embed.js'),
-    app: path.resolve(__dirname, 'src/index.js')
+    app: path.resolve(__dirname, 'src/index.js'),
+    form: path.resolve(__dirname, 'src/form.js')
   },
   output: {
     filename: '[name].js',
@@ -27,6 +28,11 @@ module.exports = {
   plugins: [
     new HtmlWebpackPlugin({
       excludeChunks: ['embed']
+    }),
+    new HtmlWebpackPlugin({
+      filename: 'form.html',
+      template: 'src/form.html',
+      excludeChunks: ['embed', 'app']
     }),
     new MiniCssExtractPlugin(),
     ...(mode === 'production' ? [(new CleanWebpackPlugin(['dist']), new UglifyJSPlugin())] : [])
