@@ -4,15 +4,19 @@
   "private": true,
   "main": "src/index.js",
   "scripts": {
-    "start": "webpack-serve --config webpack.config.js",
-    "build": "NODE_ENV=production webpack --config webpack.config.js",
-    "crawl": "node src/crawler.js"
+    "start": "node src/server",
+    "start:dev": "webpack-serve --config webpack.config.js",
+    "build": "NODE_ENV=production webpack --config webpack.config.js"
   },
   "dependencies": {
     "axios": "^0.18.0",
     "base64util": "^2.0.0-f",
+    "body-parser": "^1.18.2",
     "cheerio": "^1.0.0-rc.2",
+    "cors": "^2.8.4",
+    "express": "^4.16.3",
     "minireset.css": "0.0.3",
+    "mithril": "^1.1.6",
     "redom": "^3.12.0"
   },
   "devDependencies": {
@@ -20,6 +24,7 @@
     "css-loader": "^0.28.11",
     "html-webpack-plugin": "^3.2.0",
     "mini-css-extract-plugin": "^0.4.0",
+    "netlify-lambda": "^0.4.0",
     "postcss": "^6.0.21",
     "postcss-cssnext": "^3.1.0",
     "postcss-import": "^11.1.0",
