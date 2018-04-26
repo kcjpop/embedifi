@@ -27,7 +27,7 @@ module.exports = {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      excludeChunks: ['embed']
+      excludeChunks: ['embed', 'form']
     }),
     new HtmlWebpackPlugin({
       filename: 'form.html',
